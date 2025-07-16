@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS responsaveis;
 DROP TABLE IF EXISTS pessoas;
 DROP TABLE IF EXISTS tipos_sanguineos;
 
-
+//
 CREATE TABLE IF NOT EXISTS tipos_sanguineos (
                                                 id_tipo_sanguineo BIGINT AUTO_INCREMENT PRIMARY KEY,
                                                 tipo VARCHAR(5) NOT NULL UNIQUE
