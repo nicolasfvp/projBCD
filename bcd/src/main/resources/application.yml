@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: bcd
+
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/bcd
+    username: aluno
+    password: aluno
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:ddl-dml.sql
+
+server:
+  port: 8080
