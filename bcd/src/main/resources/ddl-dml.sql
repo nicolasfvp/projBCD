@@ -1,4 +1,22 @@
 
+DROP TABLE IF EXISTS desafio_concluido_feito;
+DROP TABLE IF EXISTS desafio_concluidos;
+DROP TABLE IF EXISTS noites_acampados;
+DROP TABLE IF EXISTS acampamentos;
+DROP TABLE IF EXISTS desafio_de_especialidade_feita;
+DROP TABLE IF EXISTS desafio_feitos;
+DROP TABLE IF EXISTS desafios;
+DROP TABLE IF EXISTS insignias;
+DROP TABLE IF EXISTS especialidades;
+DROP TABLE IF EXISTS areas_de_conhecimento;
+DROP TABLE IF EXISTS saude_dados;
+DROP TABLE IF EXISTS problemas_saude;
+DROP TABLE IF EXISTS vinculos;
+DROP TABLE IF EXISTS responsaveis;
+DROP TABLE IF EXISTS pessoas;
+DROP TABLE IF EXISTS tipos_sanguineos;
+
+
 CREATE TABLE IF NOT EXISTS tipos_sanguineos (
                                                 id_tipo_sanguineo BIGINT AUTO_INCREMENT PRIMARY KEY,
                                                 tipo VARCHAR(5) NOT NULL UNIQUE
@@ -63,7 +81,7 @@ CREATE TABLE IF NOT EXISTS insignias (
 CREATE TABLE IF NOT EXISTS desafios (
                                         id_desafio BIGINT AUTO_INCREMENT PRIMARY KEY,
                                         nome VARCHAR(255) NOT NULL,
-    id_insignia BIGINT, -- Pode ser nulo se o desafio não for de uma insígnia específica
+    id_insignia BIGINT,
     FOREIGN KEY (id_insignia) REFERENCES insignias(id_insignia)
     );
 
@@ -119,4 +137,5 @@ CREATE TABLE IF NOT EXISTS desafio_concluido_feito (
 
 INSERT INTO tipos_sanguineos (tipo) VALUES ('A+'), ('A-'), ('B+'), ('B-'), ('AB+'), ('AB-'), ('O+'), ('O-');
 INSERT INTO areas_de_conhecimento (nome) VALUES ('Ciência e Tecnologia'), ('Cultura'), ('Desportos'), ('Habilidades Escoteiras'), ('Serviços');
-INSERT INTO insignias (nome) VALUES ('Aprender'), ('Cruzeiro do Sul'); -- Exemplos
+INSERT INTO insignias (nome) VALUES ('Aprender'), ('Cruzeiro do Sul'), ('Lobo Caçador'); -- Adicionado Lobo Caçador para teste do Cruzeiro do Sul
+

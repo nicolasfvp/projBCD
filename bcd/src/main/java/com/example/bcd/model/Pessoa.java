@@ -37,9 +37,6 @@ public class Pessoa {
     private List<SaudeDado> saudeDados;
 
     @OneToMany(mappedBy = "pessoa")
-    private List<ProblemaSaude> problemasSaude;
-
-    @OneToMany(mappedBy = "pessoa")
     private List<DesafioFeito> desafiosFeitos;
 
     @OneToMany(mappedBy = "pessoa")

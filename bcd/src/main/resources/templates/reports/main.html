@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Menu de Relatórios - BCD Escoteiro</title>
+</head>
+<body>
+<section class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Menu de Relatórios</h2>
+
+    <nav class="space-y-4">
+        <a href="/relatorios/biograficos" class="block bg-blue-500 text-white py-3 px-6 rounded-md text-center text-lg font-semibold hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 shadow-md">
+            Dados Biográficos de um Jovem
+        </a>
+        <a href="/relatorios/por-especialidade" class="block bg-blue-500 text-white py-3 px-6 rounded-md text-center text-lg font-semibold hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 shadow-md">
+            Jovens por Especialidade
+        </a>
+        <a href="/relatorios/especialidades-insignias" class="block bg-blue-500 text-white py-3 px-6 rounded-md text-center text-lg font-semibold hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 shadow-md">
+            Especialidades e Insígnias de um Jovem
+        </a>
+        <a href="/relatorios/requisitos-cumpridos" class="block bg-blue-500 text-white py-3 px-6 rounded-md text-center text-lg font-semibold hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 shadow-md">
+            Requisitos Cumpridos para uma Especialidade
+        </a>
+        <a href="/relatorios/cruzeiro-do-sul" class="block bg-blue-500 text-white py-3 px-6 rounded-md text-center text-lg font-semibold hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105 shadow-md">
+            Jovens Aptos ao Cruzeiro do Sul
+        </a>
+    </nav>
+</section>
+</body>
+</html>

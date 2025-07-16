@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(title, content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}"></title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .header-bg {
+            background-color: #1a202c;
+        }
+        .nav-link {
+            color: #a0aec0;
+        }
+        .nav-link:hover {
+            color: #ffffff;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+        .btn-secondary {
+            background-color: #6b7280;
+            color: white;
+        }
+        .btn-secondary:hover {
+            background-color: #4b5563;
+        }
+        .table-header {
+            background-color: #e2e8f0;
+        }
+        .table-row-even {
+            background-color: #f9fafb;
+        }
+        .table-row-odd {
+            background-color: #ffffff;
+        }
+        .alert-success {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        .alert-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<header class="header-bg text-white shadow-md py-4">
+    <div class="container mx-auto flex justify-between items-center px-4">
+        <h1 class="text-3xl font-bold">BCD Escoteiro</h1>
+        <nav>
+            <ul class="flex space-x-6">
+                <li><a href="/" class="nav-link text-lg font-semibold rounded-md px-3 py-2 transition duration-300 ease-in-out hover:bg-gray-700">Início</a></li>
+                <li><a href="/pessoas/lista" class="nav-link text-lg font-semibold rounded-md px-3 py-2 transition duration-300 ease-in-out hover:bg-gray-700">Jovens</a></li>
+                <li><a href="/relatorios" class="nav-link text-lg font-semibold rounded-md px-3 py-2 transition duration-300 ease-in-out hover:bg-gray-700">Relatórios</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main class="flex-grow container mx-auto p-8">
+    <div th:if="${message}" class="alert-success p-4 rounded-md mb-4 shadow-sm" role="alert">
+        <p th:text="${message}"></p>
+    </div>
+    <div th:if="${error}" class="alert-error p-4 rounded-md mb-4 shadow-sm" role="alert">
+        <p th:text="${error}"></p>
+    </div>
+    <div th:replace="${content}">
+    </div>
+</main>
+
+<footer class="bg-gray-800 text-white text-center py-4 mt-8">
+</footer>
+</body>
+</html>
