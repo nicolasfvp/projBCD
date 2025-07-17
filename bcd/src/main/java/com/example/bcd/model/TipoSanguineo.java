@@ -7,9 +7,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "tipo_sanguineos")
+@Table(name = "tipos_sanguineos")
 @Data @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,4 +19,7 @@ public class TipoSanguineo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTipoSanguineo;
     private String tipo;
+
+    @OneToMany
+    private List<Pessoa> Pessoa;
 }
