@@ -1,6 +1,7 @@
 package com.example.bcd.service;
 
 import com.example.bcd.dto.PessoaDTO;
+import com.example.bcd.dto.request.*;
 import com.example.bcd.model.*;
 import com.example.bcd.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,43 +141,43 @@ public class PessoaService {
     }
 
     @Transactional
-    public void registrarDesafioFeito(Long idPessoa, Long idDesafio, LocalDate data) {
+    public void registrarDesafioFeito(Long idPessoa, DesafioFeitoRequestDTO requestDTO) {
         Pessoa pessoa = pessoaRepository.findById(idPessoa)
                 .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada"));
-        Desafio desafio = desafioRepository.findById(idDesafio)
+        Desafio desafio = desafioRepository.findById(requestDTO.getIdDesafio())
                 .orElseThrow(() -> new IllegalArgumentException("Desafio não encontrado"));
 
         DesafioFeito desafioFeito = DesafioFeito.builder()
                 .pessoa(pessoa)
                 .desafio(desafio)
-                .data(data)
+                .data(requestDTO.getData())
                 .build();
         desafioFeitoRepository.save(desafioFeito);
     }
 
     @Transactional
-    public void registrarDesafioDeEspecialidadeFeita(Long idPessoa, Long idDesafio, Long idEspecialidade, LocalDate data) {
+    public void registrarDesafioDeEspecialidadeFeita(Long idPessoa, DesafioDeEspecialidadeFeitaRequestDTO requestDTO) {
         Pessoa pessoa = pessoaRepository.findById(idPessoa)
                 .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada"));
-        Desafio desafio = desafioRepository.findById(idDesafio)
+        Desafio desafio = desafioRepository.findById(requestDTO.getIdDesafio())
                 .orElseThrow(() -> new IllegalArgumentException("Desafio não encontrado"));
-        Especialidade especialidade = especialidadeRepository.findById(idEspecialidade)
+        Especialidade especialidade = especialidadeRepository.findById(requestDTO.getIdEspecialidade())
                 .orElseThrow(() -> new IllegalArgumentException("Especialidade não encontrada"));
 
         DesafioDeEspecialidadeFeita desafioDeEspecialidadeFeita = DesafioDeEspecialidadeFeita.builder()
                 .pessoa(pessoa)
                 .desafio(desafio)
                 .especialidade(especialidade)
-                .data(data)
+                .data(requestDTO.getData())
                 .build();
         desafioDeEspecialidadeFeitaRepository.save(desafioDeEspecialidadeFeita);
     }
 
     @Transactional
-    public void registrarNoiteAcampado(Long idPessoa, Long idAcampamento) {
+    public void registrarNoiteAcampado(Long idPessoa, NoiteAcampadoRequestDTO requestDTO) {
         Pessoa pessoa = pessoaRepository.findById(idPessoa)
                 .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada"));
-        Acampamento acampamento = acampamentoRepository.findById(idAcampamento)
+        Acampamento acampamento = acampamentoRepository.findById(requestDTO.getIdAcampamento())
                 .orElseThrow(() -> new IllegalArgumentException("Acampamento não encontrado"));
 
         NoiteAcampado noiteAcampado = NoiteAcampado.builder()
@@ -187,26 +188,26 @@ public class PessoaService {
     }
 
     @Transactional
-    public void registrarDesafioConcluidoFeito(Long idPessoa, Long idDesafioConcluido, LocalDate dataInicio, LocalDate dataFim) {
+    public void registrarDesafioConcluidoFeito(Long idPessoa, DesafioConcluidoFeitoRequestDTO requestDTO) {
         Pessoa pessoa = pessoaRepository.findById(idPessoa)
                 .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada"));
-        DesafioConcluido desafioConcluido = desafioConcluidoRepository.findById(idDesafioConcluido)
+        DesafioConcluido desafioConcluido = desafioConcluidoRepository.findById(requestDTO.getIdDesafioConcluido())
                 .orElseThrow(() -> new IllegalArgumentException("Desafio Concluído não encontrado"));
 
         DesafioConcluidoFeito desafioConcluidoFeito = DesafioConcluidoFeito.builder()
                 .pessoa(pessoa)
                 .desafioConcluido(desafioConcluido)
-                .dataInicio(dataInicio)
-                .dataFim(dataFim)
+                .dataInicio(requestDTO.getDataInicio())
+                .dataFim(requestDTO.getDataFim())
                 .build();
         desafioConcluidoFeitoRepository.save(desafioConcluidoFeito);
     }
 
     @Transactional
-    public void registrarVinculo(Long idPessoa, Long idResponsavel) {
+    public void registrarVinculo(Long idPessoa, VinculoRequestDTO requestDTO) {
         Pessoa pessoa = pessoaRepository.findById(idPessoa)
                 .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada"));
-        Responsavel responsavel = responsavelRepository.findById(idResponsavel)
+        Responsavel responsavel = responsavelRepository.findById(requestDTO.getIdResponsavel())
                 .orElseThrow(() -> new IllegalArgumentException("Responsável não encontrado"));
 
         Vinculo vinculo = Vinculo.builder()
@@ -217,10 +218,10 @@ public class PessoaService {
     }
 
     @Transactional
-    public void registrarSaudeDado(Long idPessoa, Long idProblemaSaude) {
+    public void registrarSaudeDado(Long idPessoa, SaudeDadoRequestDTO requestDTO) {
         Pessoa pessoa = pessoaRepository.findById(idPessoa)
                 .orElseThrow(() -> new IllegalArgumentException("Pessoa não encontrada"));
-        ProblemaSaude problemaSaude = problemaSaudeRepository.findById(idProblemaSaude)
+        ProblemaSaude problemaSaude = problemaSaudeRepository.findById(requestDTO.getIdProblemaSaude())
                 .orElseThrow(() -> new IllegalArgumentException("Problema de Saúde não encontrado"));
 
         SaudeDado saudeDado = SaudeDado.builder()
@@ -228,5 +229,40 @@ public class PessoaService {
                 .problemaSaude(problemaSaude)
                 .build();
         saudeDadoRepository.save(saudeDado);
+    }
+
+    @Transactional(readOnly = true)
+    public List<TipoSanguineo> listarTiposSanguineos() {
+        return tipoSanguineoRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Responsavel> listarResponsaveis() {
+        return responsavelRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<ProblemaSaude> listarProblemasSaude() {
+        return problemaSaudeRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Desafio> listarDesafios() {
+        return desafioRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Especialidade> listarEspecialidades() {
+        return especialidadeRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Acampamento> listarAcampamentos() {
+        return acampamentoRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<DesafioConcluido> listarDesafiosConcluidos() {
+        return desafioConcluidoRepository.findAll();
     }
 }

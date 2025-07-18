@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Detalhes do Jovem</title>
+</head>
+<body>
+<section class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Detalhes do Jovem: <span th:text="${pessoa.nome}"></span></h2>
+
+    <div class="mb-8 p-6 bg-gray-50 rounded-md shadow-sm">
+        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Dados Biográficos</h3>
+        <ul class="space-y-2 text-gray-700">
+            <li><strong>ID:</strong> <span th:text="${pessoa.idPessoa}"></span></li>
+            <li><strong>Nome:</strong> <span th:text="${pessoa.nome}"></span></li>
+            <li><strong>Telefone:</strong> <span th:text="${pessoa.telefone}"></span></li>
+            <li><strong>Email:</strong> <span th:text="${pessoa.email}"></span></li>
+            <li><strong>Data de Nascimento:</strong> <span th:text="${pessoa.dataNascimento}"></span></li>
+            <li><strong>Tipo Sanguíneo:</strong> <span th:text="${pessoa.tipoSanguineoNome ?: 'N/A'}"></span></li>
+        </ul>
+        <div class="mt-6 text-right">
+            <a th:href="@{/pessoas/editar/{id}(id=${pessoa.idPessoa})}" class="btn-secondary px-4 py-2 rounded-md text-base font-semibold transition duration-300 ease-in-out">Editar Dados</a>
+        </div>
+    </div>
+
+    <div class="mb-8 p-6 bg-gray-50 rounded-md shadow-sm">
+        <h3 class="text-2xl font-semibold text-gray-700 mb-4">Adicionar Informações Vinculadas</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <a th:href="@{/pessoas/{idPessoa}/add-vinculo(idPessoa=${pessoa.idPessoa})}" class="btn-primary px-4 py-2 rounded-md text-base font-semibold text-center transition duration-300 ease-in-out transform hover:scale-105">Adicionar Vínculo</a>
+            <a th:href="@{/pessoas/{idPessoa}/add-saude-dado(idPessoa=${pessoa.idPessoa})}" class="btn-primary px-4 py-2 rounded-md text-base font-semibold text-center transition duration-300 ease-in-out transform hover:scale-105">Adicionar Dado de Saúde</a>
+            <a th:href="@{/pessoas/{idPessoa}/add-desafio-feito(idPessoa=${pessoa.idPessoa})}" class="btn-primary px-4 py-2 rounded-md text-base font-semibold text-center transition duration-300 ease-in-out transform hover:scale-105">Registrar Desafio Feito</a>
+            <a th:href="@{/pessoas/{idPessoa}/add-desafio-especialidade-feita(idPessoa=${pessoa.idPessoa})}" class="btn-primary px-4 py-2 rounded-md text-base font-semibold text-center transition duration-300 ease-in-out transform hover:scale-105">Registrar Desafio de Especialidade</a>
+            <a th:href="@{/pessoas/{idPessoa}/add-noite-acampado(idPessoa=${pessoa.idPessoa})}" class="btn-primary px-4 py-2 rounded-md text-base font-semibold text-center transition duration-300 ease-in-out transform hover:scale-105">Registrar Noite Acampado</a>
+            <a th:href="@{/pessoas/{idPessoa}/add-desafio-concluido-feito(idPessoa=${pessoa.idPessoa})}" class="btn-primary px-4 py-2 rounded-md text-base font-semibold text-center transition duration-300 ease-in-out transform hover:scale-105">Registrar Desafio Concluído</a>
+        </div>
+    </div>
+
+    <div class="text-center mt-8">
+        <a href="/pessoas/lista" class="btn-secondary px-6 py-3 rounded-md text-lg font-semibold transition duration-300 ease-in-out">Voltar para Lista de Jovens</a>
+    </div>
+</section>
+</body>
+</html>

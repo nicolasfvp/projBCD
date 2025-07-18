@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Registrar Desafio Concluído para</title>
+</head>
+<body>
+<section class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Registrar Desafio Concluído para <span th:text="${pessoa.nome}"></span></h2>
+
+    <form th:action="@{/pessoas/{idPessoa}/salvar-desafio-concluido-feito(idPessoa=${pessoa.idPessoa})}" th:object="${desafioConcluidoFeitoRequest}" method="post" class="space-y-6">
+        <div>
+            <label for="idDesafioConcluido" class="block text-gray-700 text-sm font-semibold mb-2">Desafio Concluído:</label>
+            <select id="idDesafioConcluido" th:field="*{idDesafioConcluido}" required
+                    class="shadow-sm border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <option value="">-- Selecione um Desafio Concluído --</option>
+                <option th:each="desafioConcluido : ${desafiosConcluidos}"
+                        th:value="${desafioConcluido.idDesafioConcluido}"
+                        th:text="${desafioConcluido.descricao}">
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <label for="dataInicio" class="block text-gray-700 text-sm font-semibold mb-2">Data de Início:</label>
+            <input type="date" id="dataInicio" th:field="*{dataInicio}"
+                   class="shadow-sm appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        </div>
+
+        <div>
+            <label for="dataFim" class="block text-gray-700 text-sm font-semibold mb-2">Data de Fim:</label>
+            <input type="date" id="dataFim" th:field="*{dataFim}"
+                   class="shadow-sm appearance-none border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+        </div>
+
+        <div class="flex justify-end space-x-4">
+            <a th:href="@{/pessoas/detalhes/{idPessoa}(idPessoa=${pessoa.idPessoa})}" class="btn-secondary px-6 py-3 rounded-md text-lg font-semibold transition duration-300 ease-in-out">Cancelar</a>
+            <button type="submit" class="btn-primary px-6 py-3 rounded-md text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105">Registrar Desafio</button>
+        </div>
+    </form>
+</section>
+</body>
+</html>

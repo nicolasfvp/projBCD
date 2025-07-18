@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Adicionar Vínculo</title>
+</head>
+<body>
+<section class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-lg">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Adicionar Vínculo para <span th:text="${pessoa.nome}"></span></h2>
+
+    <form th:action="@{/pessoas/{idPessoa}/salvar-vinculo(idPessoa=${pessoa.idPessoa})}" th:object="${vinculoRequest}" method="post" class="space-y-6">
+        <div>
+            <label for="idResponsavel" class="block text-gray-700 text-sm font-semibold mb-2">Responsável:</label>
+            <select id="idResponsavel" th:field="*{idResponsavel}" required
+                    class="shadow-sm border rounded-md w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <option value="">-- Selecione um Responsável --</option>
+                <option th:each="responsavel : ${responsaveis}"
+                        th:value="${responsavel.idResponsavel}"
+                        th:text="${responsavel.nome}">
+                </option>
+            </select>
+        </div>
+
+        <div class="flex justify-end space-x-4">
+            <a th:href="@{/pessoas/detalhes/{idPessoa}(idPessoa=${pessoa.idPessoa})}" class="btn-secondary px-6 py-3 rounded-md text-lg font-semibold transition duration-300 ease-in-out">Cancelar</a>
+            <button type="submit" class="btn-primary px-6 py-3 rounded-md text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105">Salvar Vínculo</button>
+        </div>
+    </form>
+</section>
+</body>
+</html>
